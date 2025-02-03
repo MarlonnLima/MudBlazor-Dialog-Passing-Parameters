@@ -1,0 +1,37 @@
+﻿@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.DeleteForever" Class="mr-3 mb-n1"/>
+            Delete server?
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="@Server.Id" Label="Server ID"/>
+        <MudTextField @bind-Value="@Server.Name" Label="Server Name" />
+        <MudTextField @bind-Value="@Server.Location" Label="Location" />
+        <MudTextField @bind-Value="@Server.IpAddress" Label="IP Address" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="CloseModal">Delete Server</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private IMudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public Server Server { get; set; } = new Server();
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private async Task CloseModal()
+    {
+        //In a real world scenario this bool would probably be a service to delete the item from api/database
+        Snackbar.Add("Server Deleted", Severity.Success);
+        MudDialog.Close(DialogResult.Ok(Server));
+    }
+}

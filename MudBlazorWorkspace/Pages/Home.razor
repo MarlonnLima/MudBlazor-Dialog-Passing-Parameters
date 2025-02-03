@@ -1,0 +1,21 @@
+﻿@page "/"
+@inject IDialogService DialogService
+
+<PageTitle>Home</PageTitle>
+
+
+<MudButton @onclick="OpenDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
+    Open Simple Dialog
+</MudButton>
+
+@code {
+
+    private async Task OpenDialogAsync()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+
+        var dialog = await DialogService.ShowAsync<CustomDialog>("Simple Dialog", options);
+        var result = await dialog.Result;
+        Console.Write(result);
+    }
+}

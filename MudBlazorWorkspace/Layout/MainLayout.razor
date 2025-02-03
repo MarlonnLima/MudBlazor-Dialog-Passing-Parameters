@@ -1,0 +1,31 @@
+﻿@inherits LayoutComponentBase
+
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
+
+@* Needed for dialogs *@
+<MudDialogProvider />
+
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        My Application
+    </MudAppBar>
+    <MudDrawer Open="true">
+        <MudNavMenu>
+            <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+            <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
+            <MudNavGroup Title="Settings" Expanded="true">
+                <MudNavLink Href="/users" Match="NavLinkMatch.Prefix">Users</MudNavLink>
+                <MudNavLink Href="/security" Match="NavLinkMatch.Prefix">Security</MudNavLink>
+            </MudNavGroup>
+            <MudNavLink Href="/about" Match="NavLinkMatch.Prefix">About</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
